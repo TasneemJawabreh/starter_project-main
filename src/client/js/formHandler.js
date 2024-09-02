@@ -28,9 +28,11 @@ function handleSubmit(event) {
         console.log("Server response:", data);
 
         // Handle the response data
-        document.getElementById('results').innerHTML = `Latitude: ${data.lat}`;
-        document.getElementById('results1').innerHTML = `Longitude: ${data.lng}`;
+        document.getElementById('results').innerHTML = `Latitude: ${data.temperature}`;
+        document.getElementById('results1').innerHTML = `Longitude: ${data.weatherDescription}`;
 
+
+        
         // Clear the input field
         document.getElementById('name').value = "";
     })

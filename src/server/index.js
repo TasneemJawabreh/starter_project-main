@@ -15,7 +15,8 @@ app.use(express.static('dist'));
 app.get('/', function(req, res) {
     res.sendFile(path.resolve('dist/index.html'));
 });
-
+console.log(`Your API key is ${process.env.API_KEY}`);
+const weatherbitAPIKey=process.env.API_KEY;
 app.post('/api', async (req, res) => {
     const { formText: city } = req.body;
     const geonamesUsername = 'tasneem01'; // Replace with your Geonames username
@@ -31,11 +32,27 @@ app.post('/api', async (req, res) => {
 
         const data = response.data;
         console.log(data);
-
+        const lat= data.geonames[0].lat;
+        const lng= data.geonames[0].lng;
        
+
+
+        const weatherResponse = await axios.get('https://api.weatherbit.io/v2.0/current', {
+            params: {
+                lat:lat,
+                lon: lng,
+                key: weatherbitAPIKey,
+            },
+        });
+
+        const weatherData = weatherResponse.data.data[0];
+
+        // Respond with both location and weather data
+console.log("data",weatherData);
+
             res.json({
-                lat: data.geonames[0].lat,
-                lng: data.geonames[0].lng,
+             temperature: weatherData.temp,
+             weatherDescription: weatherData.weather.description,
             });
       
     } catch (error) {
