@@ -9,27 +9,41 @@
 
         <header>
             <div class="">
-                Logo
+                weather
             </div>
             <div class="">
-                navigation
+                app
             </div>
         </header>
 
         <main>
             <section>
                 <form id="urlForm" onsubmit="return Client.handleSubmit(event)">
-                    <input id="name" type="text" name="url" placeholder="Enter URL" required>
+                    <input id="name" type="text" name="url" placeholder="Enter city name" required>
+                    <input id="date" type="date"  name="url" required>
                     <button id="submitButton" type="submit" onclick="return Client.handleSubmit(event)" onsubmit="return handleSubmit(event)">Submit</button>
                 </form>
                 
             </section>
 
             <section>
-                <strong>Form Results:</strong>
-                <div id="results">polarity: </div>
-                <div id="results1">subjectivity: </div>
-                <div id="results2">textSnippet: </div>
+                <div class="card">
+                    <div class="card-left">
+                        <div id="image-container"></div>
+                        
+                    </div>
+                    <div class="card-right">
+                        <h2 id="country">My trip to:</h2>
+                        <p id="temperature">temperature:</p>
+                        <p id="date1">date:</p>
+                        <p id="weatherDescription">weather Description:</p>
+                        <div class="card-actions">
+                            <button>Action 1</button>
+                            <button>Action 2</button>
+                        </div>
+                    </div>
+                </div>
+
             </section>
         </main>
 

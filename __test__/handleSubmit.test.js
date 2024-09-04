@@ -4,7 +4,7 @@ import { handleSubmit } from "../src/client/js/formHandler";
 // Mock the fetch API
 global.fetch = jest.fn(() =>
   Promise.resolve({
-    json: () => Promise.resolve({ message: "Server responserrr" }),
+    json: () => Promise.resolve({ message: "Server response" }),
   })
 );
 
@@ -61,15 +61,5 @@ describe("Testing the submit functionality", () => {
     global.fetch.mockClear();
 });
 
-  test("should not call fetch when an invalid URL is provided", () => {
-    // Update the input to an invalid URL
-    document.getElementById('name').value = 'invalid-url';
-    const event = { preventDefault: jest.fn() };
 
-    // Call the function
-    handleSubmit(event);
-
-    // Check that fetch is not called
-    expect(fetch).not.toHaveBeenCalled();
-  });
 });
