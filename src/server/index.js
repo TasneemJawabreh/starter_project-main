@@ -47,13 +47,26 @@ app.post('/api', async (req, res) => {
 
         const weatherData = weatherResponse.data.data[0];
 
-        // Respond with both location and weather data
-console.log("data",weatherData);
 
-            res.json({
-             temperature: weatherData.temp,
-             weatherDescription: weatherData.weather.description,
-            });
+        // Respond with both location and weather data
+         console.log("data",weatherData);
+         const pixabayAPIKey = process.env.PIXABAY_KEY;
+         const response1 = await axios.get('https://pixabay.com/api/', {
+            params: {
+                key: pixabayAPIKey,
+                q: encodeURIComponent(weatherData.weather.description),
+                image_type: 'photo',
+            },
+        });
+        const imageUrl = response1.data.hits[0].webformatURL;
+        console.log(imageUrl);
+
+        res.json({
+            temperature: weatherData.temp,
+            weatherDescription: weatherData.weather.description,
+           });
+
+
       
     } catch (error) {
         console.error("Error:", error.message);
