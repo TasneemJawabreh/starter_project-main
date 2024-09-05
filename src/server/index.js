@@ -81,7 +81,8 @@ app.post('/api', async (req, res) => {
         res.status(500).json({ error: "Failed to fetch coordinates", details: error.message });
     }
 });
-
-app.listen(8000, function () {
+let server;
+server=app.listen(8000, function () {
     console.log('Example app listening on port 8000!');
 });
+module.exports = { app, server }; // Export both app and server
