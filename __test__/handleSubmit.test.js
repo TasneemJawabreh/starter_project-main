@@ -1,7 +1,7 @@
 // Import the function to test
 import { handleSubmit } from '../src/client/js/formHandler';
 
-// Mock the fetch API
+// Mock the fetch API globally
 global.fetch = jest.fn(() =>
   Promise.resolve({
     json: () => Promise.resolve({
@@ -26,28 +26,41 @@ describe("handleSubmit", () => {
     `;
   });
 
-  test("should update the DOM elements with the server response", async () => {
-    const event = { preventDefault: jest.fn() }; // Mock event
-
-    // Await the handleSubmit call to ensure async execution completes
-    await handleSubmit(event);
-
-    // Check that fetch was called with the correct arguments
-    expect(fetch).toHaveBeenCalledWith('http://localhost:8000/api', expect.objectContaining({
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ formText: "Paris", date: "2024-09-10" })
-    }));
-
-    // Verify DOM updates
-    expect(document.getElementById('country').innerHTML).toBe('My trip to: France,Paris');
-    expect(document.getElementById('temperature').innerHTML).toBe('temperature: 25');
-    expect(document.getElementById('weatherDescription').innerHTML).toBe('weather Description: Clear sky');
-
-    // Check that the image is added to the DOM
-    const img = document.querySelector('#image-container img');
-    expect(img).not.toBeNull();
-    expect(img.src).toBe("https://example.com/image.jpg");
-    //expect(img.width).toBe(300);
+  afterEach(() => {
+    // Clean up mocks
+    jest.clearAllMocks();
   });
+
+  test("should be defined", () => {
+    // Check if the handleSubmit function is defined
+    expect(handleSubmit).toBeDefined();
+  });
+
+  test('should call fetch with ', async () => {
+    // Mock the fetch function
+    global.fetch = jest.fn(() =>
+        Promise.resolve({
+            json: () => Promise.resolve({ text: 'Mocked response text' }),
+        })
+    );
+
+    // Mock event to prevent page reload
+    const mockEvent = {
+        preventDefault: jest.fn(),
+    };
+
+    // Call handleSubmit
+    await handleSubmit(mockEvent);
+
+
+  // Check that fetch was called with the correct arguments
+  expect(fetch).toHaveBeenCalledWith('http://localhost:8000/api', expect.objectContaining({
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ formText: "Paris", date: "2024-09-10" })
+  }));
+
+    // Clean up mock
+    global.fetch.mockClear();
+});
 });

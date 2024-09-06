@@ -9,8 +9,12 @@ function handleSubmit(event) {
     const formText = document.getElementById('name').value;
     const date = document.getElementById('date').value;
 console.log(date);
+    // Check if the fields are empty
+    if (!formText || !date) {
+        alert("Please enter the city name and the date for your trip");
+    }
 
-
+else{
     // Send the data to the server
     fetch(serverURL, {
         method: 'POST',
@@ -52,6 +56,6 @@ console.log(date);
     })
     .catch(error => console.error("Error:", error));
 }
-
+}
 // Export the handleSubmit function
 export { handleSubmit };
