@@ -6,7 +6,13 @@
 - [Dependencies](#Dependencies)
 - [License](#License)
 ## description
-This project is a web tool that leverages the MeaningCloud API to analyze the sentiment and subjectivity of text from a given URL. The primary focus was on integrating Webpack for module bundling and Jest for testing. The project involved setting up a Node.js environment with Express to handle server requests and manage interactions with the MeaningCloud API. The app retrieves text from a specified URL, analyzes its sentiment (positive or negative), determines its subjectivity (subjective or factual), and displays a text snippet from the article. Webpack was configured to optimize the build process, and Jest was used to ensure the reliability of the code, particularly focusing on testing the API call functionality and error handling scenarios.
+This project is a web application that integrates multiple APIs to retrieve geographical, weather, and image data for a travel planning tool. The app allows users to input a city name and travel date, then fetches the latitude, longitude, and country information using the Geonames API. Additionally, it pulls weather data from the Weatherbit API, offering both current and forecasted weather based on the travel date. An image representing the destination or weather is retrieved from the Pixabay API.
+
+## Prerequisites
+
+Before running the project, ensure you have the following installed:
+
+- **Node.js**: Version 20.11.0
 
 ## usage
 ### 1-run the project
@@ -26,6 +32,21 @@ This project is built using JavaScript, HTML, and CSS, and the following Depende
 ### 5-Babel
 ### 6-Cors
 
+## API Credentials
+
+This project requires API credentials to interact with the Geonames, Weatherbit, and Pixabay APIs. You will need to sign up for each service, obtain the API keys, and update them in the project before running the application.
+
+### 1. Geonames API
+- Sign up at [Geonames](https://www.geonames.org/) to get your API key (username).
+- Update the `GEONAME_USERNAME` variable in your `.env` file with your Geonames username.
+
+### 2. Weatherbit API
+- Create an account at [Weatherbit](https://www.weatherbit.io/) to get your API key.
+- Update the `API_KEY` variable in your `.env` file with your Weatherbit API key.
+
+### 3. Pixabay API
+- Register at [Pixabay](https://pixabay.com/api/docs/) to obtain your API key.
+- Update the `PIXABAY_KEY` variable in your `.env` file with your Pixabay API key.
 
 ## License
 This project is licensed under the MIT License - see the `LICENSE.txt` file for details.

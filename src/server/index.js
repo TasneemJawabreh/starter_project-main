@@ -22,7 +22,7 @@ app.post('/api', async (req, res) => {
     const { date: date } = req.body;
 
     console.log(date);
-    const geonamesUsername = 'tasneem01'; 
+    const geonamesUsername = process.env.GEONAME_USERNAME; 
      //geonames api 
     try {
         const response = await axios.get('http://api.geonames.org/searchJSON', {
